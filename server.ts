@@ -211,7 +211,7 @@ async function checkAndRunDailySync() {
 
 let zipCentroids: any = {};
 try {
-  const rawData = fs.readFileSync(path.join(process.cwd(), 'repo', 'src', 'data', 'nyc_zip_centroids.json'), 'utf8');
+  const rawData = fs.readFileSync(path.join(process.cwd(), 'data', 'nyc_zip_centroids.json'), 'utf8');
   zipCentroids = JSON.parse(rawData);
 } catch (e) {
   console.log("Could not load zip centroids, continuing...");
@@ -240,7 +240,7 @@ async function startServer() {
   app.get('/api/courts', async (req, res) => {
     try {
       const results: any[] = [];
-      fs.createReadStream('./repo/nyc_tennis_courts.csv')
+      fs.createReadStream('./data/nyc_tennis_courts.csv')
         .pipe(csv())
         .on('data', (data: any) => results.push({
           park_id: data.court_id,

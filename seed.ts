@@ -16,7 +16,7 @@ const db = getFirestore(app, firebaseConfig?.firestoreDatabaseId);
 
 const results: any[] = [];
 
-fs.createReadStream('./repo/nyc_tennis_courts.csv')
+fs.createReadStream('./data/nyc_tennis_courts.csv')
   .pipe(csv())
   .on('data', (data) => results.push(data))
   .on('end', async () => {
