@@ -1,0 +1,50 @@
+{
+  "entities": {
+    "Court": {
+      "title": "Court",
+      "description": "A tennis court park location",
+      "type": "object",
+      "properties": {
+        "park_id": { "type": "string", "description": "Unique identifier for the park" },
+        "park_name": { "type": "string" },
+        "park_details": { "type": "string" },
+        "address": { "type": "string" },
+        "lat": { "type": "number", "format": "double" },
+        "lon": { "type": "number", "format": "double" },
+        "num_courts": { "type": "number" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "hours": { "type": "string" },
+        "website": { "type": "string" },
+        "court_type": { "type": "string" }
+      },
+      "required": ["park_id", "park_name", "lat", "lon"]
+    },
+    "Availability": {
+      "title": "Availability",
+      "description": "Availability time slots for a specific court",
+      "type": "object",
+      "properties": {
+        "park_id": { "type": "string" },
+        "court_id": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "time": { "type": "string" },
+        "status": { "type": "string" },
+        "reservation_link": { "type": "string" },
+        "is_available": { "type": "boolean" },
+        "last_updated": { "type": "string", "format": "date-time" }
+      },
+      "required": ["park_id", "court_id", "date", "time", "is_available"]
+    }
+  },
+  "firestore": {
+    "/courts/{parkId}": {
+      "schema": { "$ref": "#/entities/Court" },
+      "description": "Stores the tennis courts and parks"
+    },
+    "/availability/{availabilityId}": {
+      "schema": { "$ref": "#/entities/Availability" },
+      "description": "Stores the time slots and availability"
+    }
+  }
+}

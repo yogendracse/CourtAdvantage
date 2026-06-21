@@ -1,0 +1,39 @@
+name: nyc-tennis-slots-finder
+region: eastus
+environment: production
+
+# App Service Plan (Hosts both frontend and backend)
+appServicePlan:
+  name: nyc-tennis-plan
+  sku: B1  # Basic tier, can run multiple apps
+  capacity: 1
+
+# Web App (Frontend)
+webApp:
+  name: nyc-tennis-web
+  runtime: NODE|18-lts
+  port: 3000
+  nodeVersion: 18-lts
+
+# API App (Backend)
+apiApp:
+  name: nyc-tennis-api
+  runtime: PYTHON|3.9
+  port: 8000
+  pythonVersion: 3.9
+
+# WebJob (Slot Extractor)
+webJob:
+  name: slot-extractor
+  type: continuous
+  command: "python court_availability_finder.py"
+  schedule: "0 */1 * * * *"  # Run every hour
+
+# Database
+database:
+  name: nyc-tennis-db
+  type: PostgreSQL
+  version: 13
+  tier: Basic
+  storage: 32GB
+  backupRetention: 7  # days 

@@ -1,0 +1,31 @@
+Region: us-east-1  # North Virginia, same as your current Vercel region
+Application:
+  Name: nyc-tennis-slots-finder
+  Environment: production
+
+# EC2 Configuration
+EC2:
+  InstanceType: t2.micro
+  KeyName: nyc-tennis-key  # We'll create this
+  SecurityGroups:
+    - nyc-tennis-sg  # We'll create this
+
+# RDS Configuration
+RDS:
+  InstanceType: db.t2.micro
+  Engine: postgres
+  Version: 13.7
+  Storage: 20  # GB
+  DatabaseName: nyc_tennis
+  Port: 5432
+
+# S3 Configuration
+S3:
+  BucketName: nyc-tennis-static
+  Region: us-east-1
+
+# Route 53 Configuration
+Route53:
+  Domain: findyourcourts.net  # Example domain
+  Type: A
+  TTL: 300 
