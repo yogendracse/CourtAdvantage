@@ -1,6 +1,6 @@
 # 🎾 CourtAdvantage
 
-CourtAdvantage is a premium, high-performance real-time tennis reservation assistant and slot-locking system for NYC Parks. It is designed to solve the problem of highly competitive court booking in NYC (such as McCarren Park and Riverside Park) by automatically scanning availability, notifying the user, and immediately placing a session hold on targeted court drops.
+CourtAdvantage is a high-performance real-time tennis reservation assistant and slot-locking system for NYC Parks. It is designed to solve the problem of highly competitive court booking in NYC (such as McCarren Park and Riverside Park) by automatically scanning availability, notifying the user, and immediately placing a session hold on targeted court drops.
 
 ---
 
@@ -64,3 +64,9 @@ CourtAdvantage is a premium, high-performance real-time tennis reservation assis
 ## 👤 Author & Owner
 
 * **Yogendra Rao** — [LinkedIn](https://www.linkedin.com/in/dyogendrarao/)
+
+---
+
+## 📄 License
+
+This project is private and proprietary. Unauthorized copying, distribution, modification, sharing, or execution of this software is strictly prohibited. Access and usage are granted exclusively to individuals explicitly authorized by the owner. See the [LICENSE](LICENSE) file for details.
