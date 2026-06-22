@@ -255,7 +255,7 @@ export default function Home() {
           playChime();
         }
         
-        unreadNew.slice(0, 3).forEach((n: any) => {
+        unreadNew.forEach((n: any) => {
           if (autoOpenEnabled && n.reservationLink) {
             window.open(n.reservationLink, '_blank');
             // Auto-lock the slot in the app
