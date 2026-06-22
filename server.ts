@@ -189,18 +189,31 @@ async function syncFavoriteParksData() {
 }
 
 let lastDailySyncDate = "";
+let isMidnightSyncRunning = false;
 
 async function checkAndRunDailySync() {
   try {
     const nycTimeStr = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
     const nycDate = new Date(nycTimeStr);
     const hour = nycDate.getHours();
+    const minutes = nycDate.getMinutes();
     const dateStr = nycDate.toISOString().split('T')[0]; 
     
-    if (hour === 0 && lastDailySyncDate !== dateStr) {
-      console.log(`It is 12:00 AM NY time! Running daily favorites sync for ${dateStr}...`);
-      lastDailySyncDate = dateStr;
-      await syncFavoriteParksData();
+    // During the first 5 minutes of the midnight hour (12:00 AM - 12:05 AM NY time)
+    if (hour === 0 && minutes < 5) {
+      if (lastDailySyncDate !== dateStr) {
+        console.log(`It is midnight NY time window! Running daily favorites sync loop for ${dateStr}...`);
+        lastDailySyncDate = dateStr;
+      }
+      
+      if (!isMidnightSyncRunning) {
+        isMidnightSyncRunning = true;
+        try {
+          await syncFavoriteParksData();
+        } finally {
+          isMidnightSyncRunning = false;
+        }
+      }
     }
   } catch (err) {
     console.error("Error in checkAndRunDailySync:", err);
@@ -427,10 +440,10 @@ async function startServer() {
     runSyncCourts();
   }, 30 * 60 * 1000);
 
-  // Start daily sync checker interval (30 min)
+  // Start daily sync checker interval (every 5 seconds)
   setInterval(() => {
     checkAndRunDailySync();
-  }, 30 * 60 * 1000);
+  }, 5 * 1000);
 
   app.get('/api/favorites', async (req, res) => {
     try {
